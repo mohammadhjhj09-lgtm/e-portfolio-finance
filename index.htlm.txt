@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Portfolio – Prénom Nom | Finance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* ---------- Styles généraux ---------- */
+        :root {
+            --primary: #12395b;
+            --primary-light: #1f4e7a;
+            --accent: #f0b429;
+            --bg: #f5f7fa;
+            --text: #222;
+            --muted: #666;
+            --white: #fff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* ---------- Navigation ---------- */
+        header {
+            background: var(--primary);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-menu a {
+            font-size: 0.95rem;
+            padding: 6px 10px;
+            border-radius: 14px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        /* ---------- Sections générales ---------- */
+        section {
+            padding: 60px 0;
+        }
+
+        section:nth-of-type(even) {
+            background: #ffffff;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        h1 {
+            font-size: 2.1rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 16px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            color: var(--muted);
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 20px;
+            background: var(--accent);
+            color: #000;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #e7edf5;
+            color: var(--primary);
+            font-size: 0.8rem;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+        }
+
+        /* ---------- Accueil ---------- */
+        #accueil .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: 32px;
+            align-items: center;
+        }
+
+        .hero-subtitle {
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .hero-title {
+            margin-bottom: 8px;
+        }
+
+        .hero-highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .hero-photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-meta {
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        /* ---------- Sous-onglets "À propos de moi" ---------- */
+        .subtabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .subtabs a {
+            font-size: 0.9rem;
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid #d0d6e3;
+            background: #f7f9fc;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .subtabs a:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .list-check {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .list-check li::before {
+            content: "• ";
+            color: var(--accent);
+            font-weight: 900;
+        }
+
+        .list-check li {
+            margin-bottom: 6px;
+        }
+
+        /* ---------- Marché de l'emploi ---------- */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 16px 0 8px;
+        }
+
+        .stat-card {
+            background: #f7f9fc;
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary);
+        }
+
+        /* ---------- CV, LM & PITCH ---------- */
+        .doc-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .doc-desc {
+            font-size: 0.95rem;
+        }
+
+        .doc-link {
+            display: inline-block;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            text-decoration: underline;
+            color: var(--primary-light);
+        }
+
+        /* ---------- Contact ---------- */
+        form {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #d0d6e3;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-extra {
+            margin-top: 14px;
+            font-size: 0.95rem;
+        }
+
+        .linkedin-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+            font-weight: 600;
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 800px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            #accueil .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav">
+        <div class="nav-logo">
+            <!-- Remplace par ton nom -->
+            Prénom Nom – Finance
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#apropos">À propos de moi</a></li>
+            <li><a href="#marche">Marché de l'emploi</a></li>
+            <li><a href="#cv-lm-pitch">CV, LM & PITCH</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+
+    <!-- ========== ONGLET ACCUEIL ========== -->
+    <section id="accueil">
+        <div class="container">
+            <div class="hero">
+                <div>
+                    <div class="hero-subtitle">E-portfolio – Candidature secteur financier</div>
+                    <h1 class="hero-title">
+                        Bienvenue sur mon e-portfolio <span class="hero-highlight">orienté finance</span>
+                    </h1>
+                    <p>
+                        Je m’appelle <strong>Prénom Nom</strong>, étudiant en Bachelor en économie d’entreprise à la HEG Genève,
+                        avec une spécialisation et un fort intérêt pour le <strong>secteur financier</strong> (banque, audit, gestion
+                        de patrimoine, corporate finance).
+                    </p>
+                    <p>
+                        Ce e-portfolio a pour objectif de présenter mon profil, mes compétences et mes projets, afin de montrer
+                        ma valeur ajoutée pour un poste de <em>(stagaire / analyste junior / assistant financier)</em>.
+                    </p>
+                    <a href="#apropos" class="btn">Découvrir mon profil</a>
+
+                    <div class="hero-meta">
+                        <span class="tag">HEG Genève</span>
+                        <span class="tag">Finance</span>
+                        <span class="tag">Marché de l’emploi</span>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Remplace par une vraie photo de toi si tu veux -->
+                    <div class="hero-photo">
+                        Photo / Portrait<br>
+                        (à remplacer)
+                    </div>
+                    <p class="muted" style="margin-top:10px; text-align:center;">
+                        Un visuel professionnel renforce l’impact de la candidature.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ONGLET À PROPOS DE MOI ========== -->
+    <section id="apropos">
+        <div class="container">
+            <h2>À propos de moi</h2>
+            <p>
+                Cette section présente mon profil, ma manière de travailler et la manière dont je me positionne
+                sur le <strong>marché de l’emploi dans la finance</strong>.
+            </p>
+
+            <!-- Sous-onglets (liens internes) -->
+            <div class="subtabs">
+                <a href="#self-awareness">Self-awareness / Conscience de soi</a>
+                <a href="#interets">Mes intérêts</a>
+                <a href="#attentes">Mes attentes</a>
+                <a href="#competences">Mes compétences</a>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <!-- ========= Self-awareness ========= -->
+                    <div id="self-awareness">
+                        <h3>Self-awareness / Conscience de soi</h3>
+                        <p>
+                            Je porte une attention particulière à ma manière de travailler, à mon comportement en équipe
+                            et aux valeurs qui guident mes décisions.
+                        </p>
+                        <ul class="list-check">
+                            <li><strong>Rigueur et sens du détail</strong> – habitué à traiter des chiffres, des analyses
+                                et des documents financiers avec précision.</li>
+                            <li><strong>Responsabilité</strong> – respect des délais, fiabilité dans l’exécution des tâches
+                                et prise d’initiative lorsque cela est nécessaire.</li>
+                            <li><strong>Intégrité</strong> – importance de l’éthique, de la transparence et de la
+                                confidentialité dans le domaine financier.</li>
+                            <li><strong>Apprentissage continu</strong> – volonté de me former, de suivre l’actualité
+                                économique et d’améliorer mes compétences techniques.</li>
+                        </ul>
+                        <p class="muted">
+                            Ces éléments reflètent mes valeurs clés : professionnalisme, confiance, collaboration
+                            et curiosité intellectuelle.
+                        </p>
+                    </div>
+
+                    <!-- ========= Mes intérêts ========= -->
+                    <div id="interets">
+                        <h3>Mes intérêts</h3>
+                        <p><strong>Intérêts professionnels :</strong></p>
+                        <ul class="list-check">
+                            <li>Analyse financière, lecture de bilans et de comptes de résultat.</li>
+                            <li>Marchés financiers, suivi des indicateurs économiques et des politiques monétaires.</li>
+                            <li>Gestion de portefeuille, gestion des risques et allocation d’actifs.</li>
+                            <li>Digitalisation de la finance, fintech et finance décentralisée (DeFi).</li>
+                        </ul>
+                        <p><strong>Intérêts personnels :</strong></p>
+                        <ul class="list-check">
+                            <li>Lecture sur l’économie, l’investissement et le développement personnel.</li>
+                            <li>Activités sportives / associatives (à adapter selon ton profil).</li>
+                            <li>Participation à des projets étudiants et travaux de groupe orientés business.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- ========= Mes attentes ========= -->
+                    <div id="attentes">
+                        <h3>Mes attentes</h3>
+                        <p>
+                            Dans une entreprise, je recherche un environnement qui valorise à la fois la performance
+                            et le développement humain.
+                        </p>
+                        <ul class="list-check">
+                            <li><strong>Valeurs alignées</strong> – importance accordée à l’éthique, à la responsabilité
+                                sociale et à la conformité réglementaire.</li>
+                            <li><strong>Encadrement et feedback</strong> – possibilité d’être coaché par des collaborateurs
+                                expérimentés et de progresser rapidement.</li>
+                            <li><strong>Apprentissage</strong> – exposition à des missions variées (analyse, reporting,
+                                contact client, projets transverses).</li>
+                            <li><strong>Culture collaborative</strong> – travail en équipe, partage de connaissances
+                                et communication ouverte.</li>
+                        </ul>
+                        <p class="muted">
+                            Mon objectif est de contribuer à la création de valeur dans le secteur financier tout en
+                            développant mes compétences dans un cadre structuré.
+                        </p>
+                    </div>
+
+                    <!-- ========= Mes compétences ========= -->
+                    <div id="competences">
+                        <h3>Mes compétences</h3>
+                        <p>
+                            Mon parcours à la HEG et mes expériences m’ont permis de développer des compétences
+                            techniques et transversales adaptées aux métiers de la finance.
+                        </p>
+                        <p><strong>Compétences techniques :</strong></p>
+                        <ul class="list-check">
+                            <li>Comptabilité financière et analytique.</li>
+                            <li>Analyse financière, budgets, indicateurs de performance.</li>
+                            <li>Outils : Excel avancé, PowerPoint, (ajouter : FactSet, Bloomberg, etc. si applicable).</li>
+                            <li>Notions de statistiques, modélisation de base et gestion des données.</li>
+                        </ul>
+                        <p><strong>Compétences transversales :</strong></p>
+                        <ul class="list-check">
+                            <li>Travail en équipe et coordination de projets de groupe.</li>
+                            <li>Communication écrite et orale en français (et autre langue à ajouter).</li>
+                            <li>Organisation, gestion des priorités et respect des délais.</li>
+                        </ul>
+                        <p class="muted">
+                            Compétences en développement : préciser ici les domaines que tu souhaites renforcer
+                            (par ex. VBA, Python, analyse crédit, réglementation bancaire, etc.).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ONGLET MARCHÉ DE L'EMPLOI ========== -->
+    <section id="marche">
+        <div class="container">
+            <h2>Marché de l'emploi</h2>
+            <p>
+                Cette section présente mon analyse du <strong>marché de l’emploi dans le secteur financier</strong>,
+                ainsi que le poster réalisé dans le cadre du cours de gestion de carrière.
+            </p>
+
+            <div class="grid-2">
+                <div>
+                    <h3>Poster – Analyse d’un secteur d’activité</h3>
+                    <!-- Remplace le lien par l’URL réelle de ton poster (PDF ou image) -->
+                    <p>
+                        Vous pouvez consulter mon <strong>poster</strong> sur le secteur suivant :
+                        <em>(ex : banque de détail, gestion de patrimoine, audit, etc.)</em>.
+                    </p>
+                    <a href="#" class="btn">Voir le poster (PDF)</a>
+                    <p class="muted" style="margin-top:8px;">
+                        Le poster présente les tendances clés, les types de postes, les compétences recherchées
+                        et les perspectives d’évolution.
+                    </p>
+
+                    <h3 style="margin-top:24px;">Principales observations</h3>
+                    <ul class="list-check">
+                        <li>Évolution des besoins en compétences analytiques et digitales.</li>
+                        <li>Importance croissante de la réglementation et de la conformité.</li>
+                        <li>Digitalisation des services financiers et émergence de la fintech.</li>
+                        <li>Rôle central de la durabilité (ESG) dans les décisions d’investissement.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Indicateurs et chiffres clés</h3>
+                    <p class="muted">
+                        Les chiffres ci-dessous sont des exemples de données à illustrer avec des sources
+                        officielles (OFS, rapports sectoriels, tables rondes, etc.).
+                    </p>
+                    <div class="stat-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Part des emplois dans la finance</div>
+                            <div class="stat-value">xx %</div>
+                            <div class="muted">du total des emplois (Suisse / région Genève).</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Taux de chômage des diplômés HEG</div>
+                            <div class="stat-value">xx %</div>
+                            <div class="muted">dans les 12 mois après le diplôme.</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Croissance du secteur</div>
+                            <div class="stat-value">+x %</div>
+                            <div class="muted">sur les x dernières années.</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Compétences les plus demandées</div>
+                            <div class="muted">
+                                Analyse de données, réglementaire, gestion des risques, communication client.
+                            </div>
+                        </div>
+                    </div>
+                    <p class="muted">
+                        Remarque : adapter ces données avec des sources récentes (OFS, rapports d’entreprises,
+                        études bancaires, etc.).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ONGLET CV, LM & PITCH ========== -->
+    <section id="cv-lm-pitch">
+        <div class="container">
+            <h2>CV, Lettre de motivation & Pitch</h2>
+            <p>
+                Cette section permet d’accéder rapidement à mes principaux documents de candidature.
+            </p>
+
+            <div class="grid-3" style="margin-top:20px;">
+                <!-- CV -->
+                <div class="card">
+                    <div class="doc-title">Curriculum Vitae (CV)</div>
+                    <p class="doc-desc">
+                        Mon CV présente mon parcours académique à la HEG, mes expériences professionnelles,
+                        mes compétences et mes engagements personnels.
+                    </p>
+                    <!-- Remplace # par le lien vers ton CV PDF -->
+                    <a href="#" class="doc-link" target="_blank" rel="noopener">Télécharger mon CV (PDF)</a>
+                </div>
+
+                <!-- Lettre de motivation -->
+                <div class="card">
+                    <div class="doc-title">Lettre de motivation</div>
+                    <p class="doc-desc">
+                        Ma lettre de motivation est rédigée en lien avec une offre d’emploi dans la finance et
+                        montre pourquoi mon profil correspond aux attentes du poste.
+                    </p>
+                    <!-- Remplace # par le lien vers ta LM PDF -->
+                    <a href="#" class="doc-link" target="_blank" rel="noopener">Télécharger ma lettre de motivation (PDF)</a>
+                </div>
+
+                <!-- Pitch -->
+                <div class="card">
+                    <div class="doc-title">Pitch de présentation</div>
+                    <p class="doc-desc">
+                        Mon pitch est une présentation courte et percutante de mon profil, de mes objectifs et
+                        de ce que je peux apporter à une équipe dans le secteur financier.
+                    </p>
+                    <!-- Tu peux mettre ici un lien vers une vidéo ou un texte -->
+                    <a href="#" class="doc-link" target="_blank" rel="noopener">Voir / écouter mon pitch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ONGLET CONTACT ========== -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <p>
+                N’hésitez pas à me contacter pour toute opportunité de stage, d’emploi ou pour un échange
+                autour du secteur financier.
+            </p>
+
+            <div class="grid-2" style="margin-top:20px;">
+                <div>
+                    <h3>Formulaire de contact</h3>
+                    <!-- Formulaire exemple ; à connecter à un outil si besoin -->
+                    <form>
+                        <div>
+                            <label for="nom">Nom</label><br>
+                            <input id="nom" type="text" name="nom" placeholder="Votre nom">
+                        </div>
+                        <div>
+                            <label for="email">E-mail</label><br>
+                            <input id="email" type="email" name="email" placeholder="votre.email@exemple.ch">
+                        </div>
+                        <div>
+                            <label for="message">Message</label><br>
+                            <textarea id="message" name="message" placeholder="Votre message"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Envoyer</button>
+                    </form>
+                </div>
+
+                <div>
+                    <h3>Coordonnées & LinkedIn</h3>
+                    <p class="contact-extra">
+                        <strong>E-mail :</strong> prenom.nom@etu.hes-so.ch<br>
+                        <strong>Localisation :</strong> Genève, Suisse
+                    </p>
+                    <!-- Remplace le lien par ton vrai profil LinkedIn -->
+                    <a href="#" class="linkedin-link" target="_blank" rel="noopener">
+                        Mon profil LinkedIn
+                    </a>
+                    <p class="muted">
+                        Sur mon profil LinkedIn, vous trouverez également le lien vers ce e-portfolio
+                        dans la section « Coordonnées ».
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
